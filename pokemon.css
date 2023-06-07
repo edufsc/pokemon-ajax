@@ -1,0 +1,22 @@
+.pokemon-card {
+    border: 1px solid var(--color-text);
+    border-radius: 10px;
+    width: fit-content;
+    padding: 0.6rem 1rem;
+    margin: auto;
+    text-align: center;
+}
+
+.nombre-pokemon {
+    margin-top: 0;
+    text-transform: capitalize;
+}
+
+.imagen-pokemon {
+    transition-property: transform;
+    transition-duration: 1s;
+}
+
+.imagen-pokemon:hover {
+    transform: scale(1.2, 1.2) rotate(0.1turn);
+}
