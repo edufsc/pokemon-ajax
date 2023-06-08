@@ -1,10 +1,13 @@
-function actualizarPokemon(pokemon) {
-  // contenedor nombre
-  let contenedorNombre = document.querySelector(".nombre-pokemon");
-  console.log({ contenedorNombre });
+let nombrePokemon = "";
+let intentos = 5;
+// puntuación usuario
+let score = 0;
 
+function actualizarPokemon(pokemon) {
+  // contenedor feedback
+  let contenedorNombre = document.querySelector("#feedback");
   // actualizar nombre
-  contenedorNombre.textContent = pokemon.name;
+  contenedorNombre.textContent = "";
 
   // imagen
   let imagenPokemon = document.querySelector(".imagen-pokemon");
@@ -19,6 +22,8 @@ function getPokemon(id) {
   fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) =>
     response.json().then((pokemon) => {
       console.log(pokemon);
+      nombrePokemon = pokemon.name;
+      intentos = 5;
       actualizarPokemon(pokemon);
     })
   );
@@ -41,7 +46,7 @@ function initPokemon() {
     getPokemon(idPokemon);
   } else {
     // si no hay id en la URL ponemos un id fijo
-    idPokemon = 1;
+    idPokemon = getRandomPokedex();
     getPokemon(idPokemon);
   }
 
@@ -76,6 +81,33 @@ function initPokemon() {
     }
     getPokemon(idPokemon);
   });
+
+  let btnValidar = document.querySelector("#btn-validate-pokemon");
+  btnValidar.addEventListener("click", () => validarRespuesta());
+}
+
+function validarRespuesta() {
+  // seleccionar input de nombre
+  let inputNombre = document.querySelector("#input-name");
+  // seleccionar contenedor para el feedback
+  let contenedorFeedback = document.querySelector("#feedback");
+  if (inputNombre.value.toLowerCase() === nombrePokemon) {
+    // si el nombre es correcto
+    console.log("Correcto!");
+    contenedorFeedback.textContent = "Correcto!";
+    score++;
+    console.log({ score });
+  } else {
+    // si no...
+    console.log("Inténtalo otra vez!");
+    intentos--;
+    let mensaje = `Inténtalo otra vez, te quedan ${intentos} oportunidades!`;
+    if (intentos == 0) {
+      mensaje = "Game Over!";
+    }
+    contenedorFeedback.textContent = mensaje;
+    console.log({ intentos });
+  }
 }
 
 initPokemon();

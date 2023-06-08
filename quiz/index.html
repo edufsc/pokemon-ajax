@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeAPI</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../pokemon.css">
+</head>
+
+<body>
+    <button class="btn" id="random-pokemon-btn">Obtener Pokèmon</button>
+    <article class="pokemon-card">
+        <img class="imagen-pokemon" alt="Imagen del pokemon" />
+        <h2 id="feedback"></h2>
+        <div>
+            <input id="input-name" placeholder="¿Cuál es este Pokèmon?" type="text" name="pokemonName" />
+            <button class="btn btn-primary" id="btn-validate-pokemon">Validar</button>
+        </div>
+        <br />
+        <button class="btn" id="prev-pokemon-btn">Anterior</button>
+        <button class="btn" id="next-pokemon-btn">Siguiente</button>
+    </article>
+    <script src="quiz.js" type="module"></script>
+</body>
+
+</html>

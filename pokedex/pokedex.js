@@ -8,7 +8,8 @@ function imprimirPagina(pagina) {
   for (let i = 0; i < resultados.length; i++) {
     const pokemon = resultados[i];
     console.log(pokemon);
-    contenedorPokemons.innerHTML += `<li>${pokemon.name}</li>`;
+    const idPokemon = getIdFromURL(pokemon.url)
+    contenedorPokemons.innerHTML += `<li><a href="/?id=${idPokemon}">${pokemon.name}</a></li>`;
   }
 }
 
@@ -22,6 +23,23 @@ function getPage(url) {
     })
   );
 }
+
+// obtener el id de una URL como "https://pokeapi.co/api/v2/pokemon/20/"
+function getIdFromURL(url) {
+  if (url) {
+    // obtener un array con las partes de la URL
+    let partesURL = url.split("/");
+    // devolver el id como número entero
+    // (en este caso siempre está en la posición 6)
+    return parseInt(partesURL[6]);
+  } else {
+    // si no hay URL válida retornamos -1
+    return -1;
+  }
+}
+
+let idFromURL = getIdFromURL("https://pokeapi.co/api/v2/pokemon/20/");
+console.log({ idFromURL });
 
 // función para iniciar la página (botones y página por defecto)
 function init() {
